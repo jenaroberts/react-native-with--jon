@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
+import styles from "./src /styles";
 import {
-  StyleSheet,
   Text,
   View,
   ActivityIndicator,
@@ -9,7 +9,7 @@ import {
   ScrollView,
   Button,
 } from "react-native";
-const image = {
+const imageBg = {
   uri: "https://previews.123rf.com/images/kesu87/kesu871904/kesu87190400027/120480515-greek-food-background-traditional-different-greek-dishes-top-view-close-up.jpg",
 };
 
@@ -36,41 +36,22 @@ export default function App() {
     <View style={styles.container}>
       <ImageBackground
         resizeMode="cover"
-        source={image}
+        source={imageBg}
         style={styles.container}
       >
         <ScrollView>
-          {allRestaurants ? (
+          {!allRestaurants ? (
+            <ActivityIndicator size="large" color="purple" />
+          ) : (
             allRestaurants.map((singleRest) => (
               <Text style={styles.restaurantsName} key={singleRest.id}>
                 {singleRest.name}
               </Text>
             ))
-          ) : (
-            <ActivityIndicator size="large" color="purple" />
           )}
         </ScrollView>
-        <Button title="Learn More" color="#007AFF" />
-        <Text>Hey class what up!</Text>
         <StatusBar style="auto" />
       </ImageBackground>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: "100%",
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  restaurantsName: {
-    color: "",
-    textShadowColor: "black",
-    textShadowRadius: "4",
-    fontSize: 73,
-    marginVertical: 50,
-  },
-});
